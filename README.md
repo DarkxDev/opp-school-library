@@ -54,7 +54,7 @@ In order to run this project you need:
 
 Clone this repository to your desired folder:
 
-- git clone https://github.com/Uthmanbello/decode-morse-code
+- git clone https://github.com/DarkxDev/opp-school-library
 - cd desired-folder
 - code . <!-- If you are using VS Code -->
 
@@ -79,7 +79,7 @@ Clone this repository to your desired folder:
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/Uthmanbello/decode-morse-code/issues).
+Feel free to check the [issues page](https://github.com/DarkxDev/opp-school-library/issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
