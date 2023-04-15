@@ -7,9 +7,11 @@
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
 - [💻 Getting Started](#getting-started)
-  - [Setup](#setup)
   - [Prerequisites](#prerequisites)
+  - [Setup](#setup)
   - [Install](#install)
+  - [Usage](#usage)
+  - [Tests](#tests)
 - [👥 Authors](#authors)
 - [🔭 Future Features](#future-features)
 - [🤝 Contributing](#contributing)
@@ -34,7 +36,12 @@
 
 ### Key Features <a name="key-features"></a>
 
-- **Has 3 functions**
+- Add Book
+- Add User
+- Add Rental
+- List Registered Users
+- List Registered Books
+- List Rentals by User
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -44,20 +51,36 @@
 
 To get a local copy up and running, follow these steps.
 
-### Prerequisites
+### Prerequisites <a name="prerequisites">
 
 In order to run this project you need:
 
 - Ruby installed.
 
-### Setup
+### Setup <a name="setup">
 
 Clone this repository to your desired folder:
 
-- git clone https://github.com/DarkxDev/opp-school-library
-- cd desired-folder
-- code . <!-- If you are using VS Code -->
+```
+git clone https://github.com/DarkxDev/opp-school-library
+cd opp-school-library
 
+```
+
+### Install <a name="install">
+```
+bundle install
+```
+
+### Usage <a name="usage">
+```
+ruby main.rb
+```
+
+### Tests <a name="tests">
+```
+rspec spec
+```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 👤 Author <a name="authors"></a>
@@ -71,7 +94,8 @@ Clone this repository to your desired folder:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] **[Application in a full project]**
+- Better UI Experience
+- Reduce Time & Space Complexity
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
