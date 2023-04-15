@@ -7,9 +7,11 @@
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
 - [💻 Getting Started](#getting-started)
-  - [Setup](#setup)
   - [Prerequisites](#prerequisites)
+  - [Setup](#setup)
   - [Install](#install)
+  - [Usage](#usage)
+  - [Tests](#tests)
 - [👥 Authors](#authors)
 - [🔭 Future Features](#future-features)
 - [🤝 Contributing](#contributing)
@@ -49,13 +51,13 @@
 
 To get a local copy up and running, follow these steps.
 
-### Prerequisites
+### Prerequisites <a name="prerequisites">
 
 In order to run this project you need:
 
 - Ruby installed.
 
-### Setup
+### Setup <a name="setup">
 
 Clone this repository to your desired folder:
 
@@ -65,17 +67,17 @@ cd opp-school-library
 
 ```
 
-### Install
+### Install <a name="install">
 ```
 bundle install
 ```
 
-### Usage
+### Usage <a name="usage">
 ```
 ruby main.rb
 ```
 
-### Run tests
+### Tests <a name="tests">
 ```
 rspec spec
 ```
