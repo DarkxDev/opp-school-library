@@ -1,7 +1,7 @@
 require_relative 'nameable'
 
 class Person < Nameable
-  attr_reader :id
+  attr_accessor :id
   attr_accessor :name, :age, :rentals
 
   def initialize(age, name = 'Unknown', parent_permission: true)
@@ -27,9 +27,9 @@ class Person < Nameable
 
   def to_json(*args)
     if is_a? Student
-      { type: 'Student', name: @name, age: @age, parent_permission: @parent_permission }.to_json(*args)
+      { type: 'Student', name: @name, age: @age, parent_permission: @parent_permission, person_id: @id }.to_json(*args)
     elsif is_a? Teacher
-      { type: 'Teacher', name: @name, age: @age }.to_json(*args)
+      { type: 'Teacher', name: @name, age: @age, person_id: @id }.to_json(*args)
     end
   end
 

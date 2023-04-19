@@ -1,4 +1,5 @@
 class Book
+  attr_accessor :id
   attr_accessor :title, :author, :rentals
 
   def initialize(title, author)
@@ -12,6 +13,6 @@ class Book
   end
 
   def to_json(*args)
-    { title: @title, author: @author }.to_json(*args)
+    { title: @title, author: @author, book_id: Random.rand(1..1000) }.to_json(*args)
   end
 end
