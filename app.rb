@@ -94,9 +94,9 @@ class App
   def create_rental
     puts 'Select a book from the following list by number'
     @books.each_with_index { |book, index| puts "#{index}) Title: #{book.title}, Author: #{book.author}" }
-  
+
     book_id = gets.chomp.to_i
-  
+
     puts 'Select a person from the following list by number (not id)'
     @people.each_with_index do |person, index|
       if person.is_a? Student
@@ -106,15 +106,15 @@ class App
       end
     end
     person_id = gets.chomp.to_i
-  
+
     print 'Date [MM/DD/YYYY]: '
     date = gets.chomp.to_s
-  
+
     rental = Rental.new(date, @people[person_id], @books[book_id])
     @rentals << rental
-  
+
     puts 'Rental created successfully.'
-  end  
+  end
 
   def list_rentals
     print 'ID of person: '
@@ -131,7 +131,7 @@ class App
   def save_books(filename)
     File.write(filename, @books.to_json)
   end
-  
+
   def save_people(filename)
     File.write(filename, @people.to_json)
   end
@@ -156,8 +156,8 @@ class App
     if File.exist?(filename)
       @people = JSON.parse(File.read(filename)).map do |p|
         if p['type'] == 'Student'
-          student = Student.new(p['age'], p['name'], p['parent_permission'])
-          student.id = p['person_id']
+          Student.new(p['age'], p['name'], p['parent_permission'])
+          # student.id = p['person_id']
         elsif p['type'] == 'Teacher'
           Teacher.new(p['age'], p['name'], p['specialization'])
         end
@@ -171,13 +171,11 @@ class App
     if File.exist?(filename)
       @rentals = JSON.parse(File.read(filename)).map do |r|
         book = @books.find { |b| b.title == r['book']['title'] }
-        person_id = r['person']['person_id']
-        person = @people.find { |p| p.person_id == person_id }
+        person = @people.find { |p| p.name == r['person']['name'] }
         Rental.new(r['date'], person, book)
       end
     else
       File.write(filename, '[]')
     end
   end
-
 end
