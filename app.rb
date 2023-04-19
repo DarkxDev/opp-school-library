@@ -3,6 +3,7 @@ require './person'
 require './student'
 require './teacher'
 require './rental'
+require 'json'
 
 class App
   attr_accessor :people, :books, :rentals
@@ -124,4 +125,66 @@ class App
       puts "Date: #{rental.date}, Book: \"#{rental.book.title}\" by #{rental.book.author}" if rental.person.id == id
     end
   end
+
+  # Data Preservation Methods ---
+
+  def save_books(filename)
+    File.write(filename, @books.to_json)
+  end
+
+  def save_people(filename)
+    File.write(filename, @people.to_json)
+  end
+
+  def save_rentals(filename)
+    File.write(filename, @rentals.to_json)
+  end
+
+  # Data Loading Methods ---
+
+  def load_books(filename)
+    if File.exist?(filename)
+      @books = JSON.parse(File.read(filename)).map do |b|
+        Book.new(b['title'], b['author'])
+      end
+    else
+      File.write(filename, '[]')
+    end
+  end
+
+  def load_people(filename)
+    if File.exist?(filename)
+      @people = JSON.parse(File.read(filename)).map do |p|
+        if p['type'] == 'Student'
+          Student.new(p['age'], p['name'], p['parent_permission'])
+        elsif p['type'] == 'Teacher'
+          Teacher.new(p['age'], p['name'], p['specialization'])
+        end
+      end
+    else
+      File.write(filename, '[]')
+    end
+  end
+
+  def load_rentals(filename)
+    if File.exist?(filename)
+      @rentals = JSON.parse(File.read(filename)).map do |r|
+        person_data = r['person']
+        person = case person_data['type']
+                   when 'Student'
+                     Student.new(person_data['age'], person_data['name'], parent_permission: person_data['parent_permission'])
+                   when 'Teacher'
+                     Teacher.new(person_data['age'], person_data['name'])
+                   end
+        
+        book_data = r['book']
+        book = Book.new(book_data['title'], book_data['author'])
+        
+        Rental.new(r['date'], person, book)
+      end
+    else
+      File.write(filename, '[]')
+    end
+  end  
+  
 end
