@@ -9,7 +9,7 @@ require 'json'
 describe Person do
   describe '#initialize' do
     it 'creates a new Person object' do
-      person = Person.new(20, 'John', parent_permission: :true)
+      person = Person.new(20, 'John', parent_permission: true)
       expect(person).to be_a(Person)
     end
   end
