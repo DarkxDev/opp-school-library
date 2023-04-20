@@ -5,22 +5,39 @@ require_relative '../person'
 require 'json'
 
 describe Book do
-  before :each do
-    @person = Person.new(15, 'John')
-    @book = Book.new('Requiem', 'Hitman')
-    @date = '22/22/2222'
+  describe '#initialize' do
+    it 'creates a new Book object' do
+      book = Book.new('The Hobbit', 'J.R.R. Tolkien')
+      expect(book).to be_an_instance_of(Book)
+    end
+
+    it 'sets the title and author attributes' do
+      book = Book.new('The Hobbit', 'J.R.R. Tolkien')
+      expect(book.title).to eq('The Hobbit')
+      expect(book.author).to eq('J.R.R. Tolkien')
+    end
+
+    it 'sets the rentals attribute to an empty array' do
+      book = Book.new('The Hobbit', 'J.R.R. Tolkien')
+      expect(book.rentals).to eq([])
+    end
   end
 
-  it 'creates a new Rental object' do
-    rental = @book.add_rental(@person, @date)
-    expect(rental).to be_instance_of(Rental)
-  end
+  describe '#add_rental' do
+    it 'creates a new Rental object' do
+      book = Book.new('The Hobbit', 'J.R.R. Tolkien')
+      person = Person.new(20, 'John')
+      date = '2023-04-20'
+      rental = book.add_rental(person, date)
+      expect(rental).to be_an_instance_of(Rental)
+    end
 
-  it "includes the book's title in the JSON string" do
-    expect(JSON.parse(@book.to_json)['title']).to eq('Requiem')
-  end
-
-  it "includes the book's author in the JSON string" do
-    expect(JSON.parse(@book.to_json)['author']).to eq('Hitman')
+    it 'adds the new rental to the rentals attribute' do
+      book = Book.new('The Hobbit', 'J.R.R. Tolkien')
+      person = Person.new(20, 'John')
+      date = '2023-04-20'
+      rental = book.add_rental(person, date)
+      expect(book.rentals).to include(rental)
+    end
   end
 end

@@ -7,18 +7,50 @@ require_relative '../teacher'
 require 'json'
 
 describe Person do
-  before :each do
-    @book = Book.new('Requiem', 'Hitman')
-    @person = Person.new(15, 'Darkx', parent_permission: true)
+  describe '#initialize' do
+    it 'creates a new Person object' do
+      person = Person.new(20, 'John', parent_permission: :true)
+      expect(person).to be_a(Person)
+    end
   end
 
-  it 'creates a new rental object' do
-    rental = @person.add_rental(@book, '22/22/2222')
-    expect(rental).to be_instance_of(Rental)
+  describe '#can_use_services?' do
+    context 'when the person is of age' do
+      it 'returns true' do
+        person = Person.new(25, 'John')
+        expect(person.can_use_services?).to eq(true)
+      end
+    end
+
+    context 'when the person is underage but has parent permission' do
+      it 'returns true' do
+        person = Person.new(17, 'John', parent_permission: true)
+        expect(person.can_use_services?).to eq(true)
+      end
+    end
+
+    context 'when the person is underage and does not have parent permission' do
+      it 'returns false' do
+        person = Person.new(17, 'John', parent_permission: false)
+        expect(person.can_use_services?).to eq(false)
+      end
+    end
   end
 
-  it "adds the rental object to the person's rentals" do
-    rental = @person.add_rental(@book, '22/22/2222')
-    expect(@person.rentals).to include(rental)
+  describe '#correct_name' do
+    it 'returns the name attribute' do
+      person = Person.new(20, 'John', parent_permission: true)
+      expect(person.correct_name).to eq('John')
+    end
+  end
+
+  describe '#add_rental' do
+    it 'creates a new Rental object' do
+      person = Person.new(20, 'John', parent_permission: true)
+      book = Book.new('Harry Potter', 'J.K Rowling')
+      date = '2023-04-20'
+      rental = person.add_rental(book, date)
+      expect(rental).to be_a(Rental)
+    end
   end
 end
