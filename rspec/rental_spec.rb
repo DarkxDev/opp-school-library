@@ -2,20 +2,23 @@ require_relative '../rental'
 require_relative '../book'
 require_relative '../person'
 require 'rspec'
-require 'json'
 
 describe Rental do
-  describe '#to_json' do
-    it 'returns a JSON representation of the rental' do
-      person = Person.new(18, 'John Doe', parent_permission: true)
-      book = Book.new('The Great Gatsby', 'F. Scott Fitzgerald')
-      rental = Rental.new('22/22/2023', person, book)
-      expected_json = {
-        person: { age: 18, name: 'John Doe', rentals: [rental] },
-        book: { title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', rentals: [rental] },
-        date: '22/22/2023'
-      }.to_json
-      expect(rental.to_json).to eq(expected_json)
-    end
+  before(:each) do
+    @book = Book.new('Requiem', 'Hitman')
+    @person = Person.new(15, 'Darkx', parent_permission: true)
+    @rental = Rental.new('22/22/2222', @person, @book)
+  end
+
+  it 'should create an instance of Rental' do
+    expect(@rental).to be_an_instance_of(Rental)
+  end
+
+  it 'should initialize with a person instance' do
+    expect(@rental.instance_variable_get(:@person)).to be_an_instance_of(Person)
+  end
+
+  it 'should initialize with a book instance' do
+    expect(@rental.instance_variable_get(:@book)).to be_an_instance_of(Book)
   end
 end

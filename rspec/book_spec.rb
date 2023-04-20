@@ -5,7 +5,6 @@ require_relative '../person'
 require 'json'
 
 describe Book do
-
   before :each do
     @person = Person.new(15, 'John')
     @book = Book.new('Requiem', 'Hitman')
@@ -18,11 +17,10 @@ describe Book do
   end
 
   it "includes the book's title in the JSON string" do
-    expect(JSON.parse(@book.to_json)["title"]).to eq("Requiem")
+    expect(JSON.parse(@book.to_json)['title']).to eq('Requiem')
   end
 
   it "includes the book's author in the JSON string" do
-    expect(JSON.parse(@book.to_json)["author"]).to eq("Hitman")
+    expect(JSON.parse(@book.to_json)['author']).to eq('Hitman')
   end
-
 end
